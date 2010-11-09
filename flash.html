@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>flash</title>
+		<script type="text/javascript" src="http://blog.monstuff.com/Flash4AJAX/static/FlashHelper.js"></script>
+	</head>
+	<body>
+		flash
+		<script type="text/javascript">
+			var apiKey = "f72e45685382f281ab7ff35dff816377";
+			var url = "http://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=" + apiKey + "&format=json";
+
+			url = url + "&artist=Dusty Springfield&album=Dusty In Memphis";
+
+			FlashHelper.writeFlash();
+
+			FlashHelper.onload = function(flashHelper) {
+				getAlbum();
+			};
+
+			function getAlbum() {
+				var fxhr = new FlashXMLHttpRequest();
+
+				fxhr.onload = function() {
+					var data = JSON.parse(fxhr.responseText);
+					alert(data.album.releasedate);
+				};
+
+				fxhr.open("GET", url);
+
+				fxhr.send("");
+			}
+		</script>
+	</body>
+</html>

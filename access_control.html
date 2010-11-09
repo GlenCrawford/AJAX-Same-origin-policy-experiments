@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>access_control</title>
+	</head>
+	<body>
+		access_control
+		<script type="text/javascript">
+			var apiKey = "f72e45685382f281ab7ff35dff816377";
+			var url = "http://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=" + apiKey + "&format=json";
+
+			url = url + "&artist=Vangelis&album=Blade Runner";
+			url = "http://localhost/access_control.php";
+
+			xhr = new XMLHttpRequest();
+
+			xhr.open("GET", url, true);
+			xhr.send(null);
+
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4) {
+					data = JSON.parse(xhr.responseText);
+					alert(data.album.releasedate);
+				}
+			};
+		</script>
+	</body>
+</html>
